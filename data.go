@@ -24,8 +24,8 @@ type company struct {
 	Phone   string   `xml:"phone"`
 	Social  []link   `xml:"social>link"`
 	// videos are loaded with a media object
-	Videos  []video  `xml:"videos>video"`
-	Quotes  []struct {
+	Videos []video `xml:"videos>video"`
+	Quotes []struct {
 		Text string `xml:"text"`
 		From string `xml:"from"`
 		Link link   `xml:"link"`
@@ -46,7 +46,7 @@ type company struct {
 	} `xml:"credits>credit"`
 	Contacts []struct {
 		Name string `xml:"name"`
-		Link   link `xml:"link"`
+		Link link   `xml:"link"`
 	} `xml:"contacts>contact"`
 }
 

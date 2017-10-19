@@ -2,9 +2,8 @@ package presskit
 
 import (
 	"errors"
-	"os"
 	"io/ioutil"
-
+	"os"
 	//"github.com/sanity-io/litter"
 )
 
@@ -23,17 +22,17 @@ func (p Presskit) Generate() error {
 	}
 
 	/*
-	// process games
-	files, err := ioutil.ReadDir(filepath.Join(p.InputPath, "games"))
-	if err != nil {
-		return err
-	}
-	for _, f := range files {
-		err := p.processGame(f)
+		// process games
+		files, err := ioutil.ReadDir(filepath.Join(p.InputPath, "games"))
 		if err != nil {
 			return err
 		}
-	}*/
+		for _, f := range files {
+			err := p.processGame(f)
+			if err != nil {
+				return err
+			}
+		}*/
 
 	// generate static files (css etc)
 	err = p.generateStaticFiles()
@@ -43,7 +42,6 @@ func (p Presskit) Generate() error {
 
 	return nil
 }
-
 
 // processCompany processes the company level
 func (p Presskit) processCompany() error {
@@ -67,7 +65,7 @@ func (p Presskit) processCompany() error {
 	}
 
 	// parse data file
-	fileData, err := ioutil.ReadFile(join(p.InputPath, "company." + p.Parser.Extension()))
+	fileData, err := ioutil.ReadFile(join(p.InputPath, "company."+p.Parser.Extension()))
 	if err != nil {
 		return err
 	}
@@ -170,7 +168,6 @@ func (p Presskit) generateStaticFiles() error {
 	}
 	return nil
 }
-
 
 // Clean removes the output folder and should only be called on error
 func (p Presskit) Clean() {

@@ -13,7 +13,7 @@ func main() {
 	var (
 		log = logo.NewSimpleLogger(os.Stderr, logo.INFO, "", true)
 
-		inputPath = flag.String("input", ".", "Folder with the presskit data")
+		inputPath  = flag.String("input", ".", "Folder with the presskit data")
 		outputPath = flag.String("output", "./press", "Folder for the presskit html")
 	)
 

@@ -11,8 +11,8 @@ import (
 // companyData is given to a company template
 // TODO not happy with outputPath here
 type companyData struct {
-	Company company
-	Media media
+	Company    company
+	Media      media
 	outputPath string
 }
 
@@ -28,8 +28,8 @@ func renderCompany(c company, m media, outputPath string) ([]byte, error) {
 
 	data := companyData{
 		outputPath: outputPath,
-		Company: c,
-		Media: m,
+		Company:    c,
+		Media:      m,
 	}
 
 	// read template

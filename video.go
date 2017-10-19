@@ -8,7 +8,7 @@ const (
 	// video embed strings
 	youtubeEmbed = "<iframe src=\"https://www.youtube.com/embed/%s\" frameborder=\"0\" allowfullscreen></iframe>"
 	vimeoEmbed   = "<iframe src=\"https://player.vimeo.com/video/%s?title=0&byline=0&portrait=0\" frameborder=\"0\" allowfullscreen></iframe>"
-	htmlEmbed   = `
+	htmlEmbed    = `
 		<video controls>
 			<source src="%s" type="video/%s">
 			Your browser does not support HTML5 video.
@@ -22,7 +22,7 @@ const (
 type video struct {
 	Title  string `xml:"title"`
 	Source string `xml:"source"` // Youtube etc
-	Id     string `xml:"id"` // e.g. youtube/vimeo id or path to local video
+	Id     string `xml:"id"`     // e.g. youtube/vimeo id or path to local video
 }
 
 func (v video) Embed() template.HTML {

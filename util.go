@@ -1,15 +1,15 @@
 package presskit
 
 import (
+	"archive/zip"
+	"bytes"
 	"fmt"
 	"html/template"
 	"io"
 	"io/ioutil"
 	"os"
-	"path/filepath"
 	"path"
-    "bytes"
-    "archive/zip"
+	"path/filepath"
 )
 
 func html(format string, a ...interface{}) template.HTML {
@@ -61,7 +61,7 @@ func copyDir(source, destination string) error {
 func zipFiles(basepath string, files []string) ([]byte, error) {
 	buf := new(bytes.Buffer)
 
-    z := zip.NewWriter(buf)
+	z := zip.NewWriter(buf)
 
 	for _, p := range files {
 		fullPath := join(basepath, p)
