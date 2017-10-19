@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<company>
+    <title>My Company</title>
+    <founding-date>March 2017</founding-date>
+    <website>
+    	<label>example.com</label>
+    	<link>http://example.com</link>
+    </website>
+    <based-in>Utopia</based-in>
+    <press-contact>hello@example.com</press-contact>
+    <phone>+12 (0) 2345678</phone>
+    <description>Animi quo eveniet placeat at est. In eveniet corrupti in mollitia consequatur. Consequatur et neque laudantium. Velit dignissimos nostrum voluptatem dolores reprehenderit. Ea consequatur rerum excepturi quia accusantium ut.
+
+Tenetur voluptatem et tempora est. Accusantium labore et soluta illum harum autem in. Fugiat aperiam occaecati ipsam. Iste facilis adipisci rem delectus. Dolore et ut laboriosam quis. Commodi aut animi optio quaerat.
+
+Molestias et et id eos. Et earum autem praesentium quis at ratione quo. Modi et qui quos sed accusamus suscipit consequuntur dolor. Quia itaque mollitia incidunt rerum sint quam saepe. Ea deserunt voluptatibus quia ut harum quis. Et debitis ratione accusamus atque sed ex sed.
+
+Ut qui et eveniet. Est ut occaecati sit et rem. Esse sit ullam et dolores natus eos fugiat. Iste sunt laboriosam earum est eaque fuga et. Officiis dolores dolorem omnis. Qui sapiente cumque aut et quod.</description>
+    <history>
+        <paragraph>
+            <header>First section</header>
+            <text>Animi quo eveniet placeat at est. In eveniet corrupti in mollitia consequatur. Consequatur et neque laudantium. Velit dignissimos nostrum voluptatem dolores reprehenderit. Ea consequatur rerum excepturi quia accusantium ut.</text>
+        </paragraph>
+        <paragraph>
+            <header>Second section</header>
+            <text>Animi quo eveniet placeat at est. In eveniet corrupti in mollitia consequatur. Consequatur et neque laudantium. Velit dignissimos nostrum voluptatem dolores reprehenderit. Ea consequatur rerum excepturi quia accusantium ut.</text>
+        </paragraph>
+    </history>
+    <address>
+       <line>Teststreet 69</line>
+       <line>12345 Demotown</line>
+   </address>
+    <social>
+    	<link>
+    		<label>Facebook</label>
+    		<link>https://www.facebook.com/example</link>
+    	</link>
+    	<link>
+    		<label>Twitter</label>
+    		<link>https://www.twitter.com/example</link>
+    	</link>
+    </social>
+    <videos>
+        <video>
+            <title>Into the Breach - Trailer</title>
+            <source>vimeo</source>
+            <id>203014674</id>
+        </video>
+        <video>
+            <title>FTL - Trailer</title>
+            <source>youtube</source>
+            <id>wWTy4kiNXeY</id>
+        </video>
+    </videos>
+    <awards>
+        <award>
+            <description>Ultra Game Award</description>
+            <info>Ultra Game Days 2017</info>
+        </award>
+        <award>
+            <description>Other Award</description>
+            <info>Indie Game Convention 2016</info>
+        </award>
+    </awards>
+    <quotes>
+        <quote>
+            <text>This is so great!!</text>
+            <from>Mr. Miller</from>
+            <link>
+                <label>miller.io</label>
+                <link>https://example.com</link>
+            </link>
+        </quote>
+        <quote>
+            <text>Such a great company</text>
+            <from>Hello Magazine</from>
+            <link>
+                <label>hello-magazine.com</label>
+                <link>https://example.com</link>
+            </link>
+        </quote>
+    </quotes>
+    <additionals>
+        <additional>
+            <title>Example on Twitter</title>
+            <description>Personal twitter account of Example</description>
+            <link>
+                <label>twitter.com</label>
+                <link>https://example.com</link>
+            </link>
+        </additional>
+        <additional>
+            <title>XDor on Twitter</title>
+            <description>Personal twitter account of XDor</description>
+            <link>
+                <label>twitter.com</label>
+                <link>https://example.com</link>
+            </link>
+        </additional>
+    </additionals>
+    <credits>
+        <credit>
+            <person>Henry Forest</person>
+            <role>Lead developer, Examplegames</role>
+            <link>http://example.com/henry</link>
+        </credit>
+        <credit>
+            <person>Peter Griffin</person>
+            <role>Art designer, Freelancer</role>
+            <link>http://example.com/beer</link>
+        </credit>
+    </credits>
+    <contacts>
+        <contact>
+            <name>Inquiries</name>
+            <link>
+                <label>hello@example.com</label>
+                <link>mailto:hello@example.com</link>
+            </link>
+        </contact>
+        <contact>
+            <name>Web</name>
+            <link>
+                <label>example.com</label>
+                <link>http://example.com</link>
+            </link>
+        </contact>
+    </contacts>
+</company>
