@@ -159,7 +159,7 @@
 
 				{{if .Media.Images}}
 					<h2 id="images">Images</h2>
-					<a href="zip/images.zip"><div class="uk-alert">download all images as zip archive ({{ .ZipSize "images.zip" }})</div></a>
+					<a href="zip/images.zip"><div class="uk-alert">download all images as zip archive ({{ .Media.ZipSize "images.zip" }})</div></a>
 					<div class="uk-grid images">
 						{{ range .Media.Images }}
 							<div class="uk-width-medium-1-2">
@@ -175,7 +175,7 @@
 
 				{{if .Media.HasLogoOrIcon}}
 					<h2 id="logo">Logo &amp; Icon</h2>
-					<a href="zip/logo.zip"><div class="uk-alert">download logo and icon as zip archive ({{ .ZipSize "logo.zip" }})</div></a>
+					<a href="zip/logo.zip"><div class="uk-alert">download logo and icon as zip archive ({{ .Media.ZipSize "logo.zip" }})</div></a>
 					<div class="uk-grid images">
 						{{if .Media.Logo}}
 							<div class="uk-width-medium-1-2">

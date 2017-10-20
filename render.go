@@ -3,9 +3,6 @@ package presskit
 import (
 	"bytes"
 	"html/template"
-	"os"
-
-	"code.cloudfoundry.org/bytefmt"
 )
 
 // companyData is given to a company template
@@ -55,16 +52,4 @@ func renderCompany(c company, m media, outputPath string) ([]byte, error) {
 // renderCompany renders a game html
 func renderGame(c company, g game) ([]byte, error) {
 	return []byte(""), nil
-}
-
-// ZipSize returns a prettyprinted size string of a zip file
-func (d companyData) ZipSize(name string) string {
-	info, err := os.Stat(join(d.outputPath, "zip", name))
-	if err != nil {
-		return "unknown size"
-	}
-	// TODO own bytefmt function
-	s := bytefmt.ByteSize(uint64(info.Size()))
-
-	return s
 }

@@ -4,6 +4,8 @@ import (
 	"io/ioutil"
 	"path/filepath"
 	"strings"
+
+	"code.cloudfoundry.org/bytefmt"
 )
 
 const imageDir = "images"
@@ -16,6 +18,7 @@ type media struct {
 	Logo   string
 	Images []string // images for the image section
 	Videos []video  // videos for the video section
+	zipSizes map[string]string
 }
 
 // newImages reads an image directory and seperates the images
@@ -65,6 +68,8 @@ func newMedia(path string, c company) (*media, error) {
 		m.Videos = append(m.Videos, v)
 	}
 
+	m.zipSizes = make(map[string]string)
+
 	return &m, nil
 }
 
@@ -90,10 +95,19 @@ func (m media) generateZip(outputPath string) error {
 		if err != nil {
 			return err
 		}
+
+		// TODO own format func
+		m.zipSizes[name] = bytefmt.ByteSize(uint64(len(zipData)))
 	}
 
 	return nil
 }
+
+// ZipSize is called from template to get the size string representation of a zip file
+func (m media) ZipSize(name string) string {
+	return m.zipSizes[name]
+}
+
 
 // used in template to determine if a logo or an icon is present
 // TODO can be put in template?
