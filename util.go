@@ -92,7 +92,7 @@ func zipFiles(basepath string, files []string) ([]byte, error) {
 
 // writeFile is a shortcut because of file permissions
 func writeFile(path string, data []byte) error {
-	return ioutil.WriteFile(path, data, 0770)
+	return ioutil.WriteFile(path, data, 0644)
 }
 
 // join is a shortcut for filepath.Join

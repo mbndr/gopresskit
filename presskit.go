@@ -151,6 +151,13 @@ func (p Presskit) setupOutputFolder() error {
 			return err
 		}
 	}
+
+	// create file for disabling jekyll on gh-pages
+	err := writeFile(join(p.OutputPath, ".nojekyll"), []byte{})
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 
