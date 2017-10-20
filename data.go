@@ -50,5 +50,6 @@ type company struct {
 	} `xml:"contacts>contact"`
 }
 
+// game represents the data of a game
 type game struct {
 }

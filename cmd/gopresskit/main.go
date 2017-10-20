@@ -2,19 +2,17 @@ package main
 
 import (
 	"flag"
-	"os"
+	"log"
 
 	"github.com/mbndr/gopresskit"
-	"github.com/mbndr/logo"
 )
 
 func main() {
 
 	var (
-		log = logo.NewSimpleLogger(os.Stderr, logo.INFO, "", true)
-
 		inputPath  = flag.String("input", ".", "Folder with the presskit data")
 		outputPath = flag.String("output", "./press", "Folder for the presskit html")
+		forceMode  = flag.Bool("force", false, "Force existing output folder to remove")
 	)
 
 	flag.Parse()
@@ -23,11 +21,11 @@ func main() {
 		InputPath:  *inputPath,
 		OutputPath: *outputPath,
 		Parser:     presskit.XMLParser{},
+		ForceMode:  *forceMode,
 	}
 
 	err := p.Generate()
 	if err != nil {
-		p.Clean()
 		log.Fatal(err)
 	}
 }

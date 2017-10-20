@@ -4,36 +4,51 @@ import (
 	"errors"
 	"io/ioutil"
 	"os"
-
 	//"github.com/sanity-io/litter"
 )
 
+// Presskit is created by the caller script and wraps all generation functions
 type Presskit struct {
-	Parser     Parser
-	InputPath  string
+	// parser manages the parsing from the data file (e.g. company.xml) to a company object
+	Parser Parser
+
+	// input paths contains the company data, games and assets
+	InputPath string
+
+	// output path contains all generated data
 	OutputPath string
+
+	// if enabled, the output folder will removed and overwritten instead of a error
+	ForceMode bool
 }
 
-// Generate generates the static html files
+// Generate handles the whole generation process
 func (p Presskit) Generate() error {
-	// process company
-	err := p.processCompany()
+	// create output folder
+	err := p.setupOutputFolder()
 	if err != nil {
 		return err
 	}
 
-	/*
-		// process games
-		files, err := ioutil.ReadDir(filepath.Join(p.InputPath, "games"))
+	// process company
+	err = p.processCompany()
+	if err != nil {
+		return err
+	}
+
+	/* TODO
+	// process games
+	files, err := ioutil.ReadDir(filepath.Join(p.InputPath, "games"))
+	if err != nil {
+		return err
+	}
+	for _, f := range files {
+		err := p.processGame(f)
 		if err != nil {
 			return err
 		}
-		for _, f := range files {
-			err := p.processGame(f)
-			if err != nil {
-				return err
-			}
-		}*/
+	}
+	*/
 
 	// generate static files (css etc)
 	err = p.generateStaticFiles()
@@ -46,13 +61,6 @@ func (p Presskit) Generate() error {
 
 // processCompany processes the company level
 func (p Presskit) processCompany() error {
-
-	// create output folder
-	err := p.setupOutputFolder()
-	if err != nil {
-		return err
-	}
-
 	// copy images and videos
 	copyDirs := []string{"images", "videos"}
 	for _, d := range copyDirs {
@@ -88,7 +96,7 @@ func (p Presskit) processCompany() error {
 	}
 
 	// render html
-	html, err := renderCompany(*company, *media, p.OutputPath)
+	html, err := renderCompany(*company, *media)
 	if err != nil {
 		return err
 	}
@@ -100,50 +108,24 @@ func (p Presskit) processCompany() error {
 	return nil
 }
 
-/*
-// processCompany processes a game level
+/* TODO
+// processGame processes a game level
 func (p Presskit) processGame(f os.FileInfo) error {
-	// paths relative to the
-	gameInputPath := filepath.Join(p.InputPath, "games", f.Name())
-	gameOutputPath := filepath.Join(p.OutputPath, "games", f.Name())
-	litter.Dump(gameInputPath)
-	litter.Dump(gameOutputPath)
 
-	// create output dir
-	err := os.MkdirAll(fullOutputPath, 0700)
-	if err != nil {
-		return err
-	}
-	// copy images
-	err = copyDir(
-		filepath.Join(fullInputPath, "images"),
-		filepath.Join(fullOutputPath, "images"),
-	)
-	if err != nil {
-		return err
-	}
-
-	// parse data file
-	fileData, err := p.readInputFile(filepath.Join("" "game.") + p.Parser.Extension())
-	if err != nil {
-		return err
-	}
-
-	// TODO render html of game page
-	// TODO zip images / logo&icon
-	return nil
-}*/
+}
+*/
 
 // setupOutputFolder creates the output folder and a few subdirs
-// TODO remove debug removement / add flag
 func (p Presskit) setupOutputFolder() error {
-	os.RemoveAll(p.OutputPath)
+	if p.ForceMode {
+		os.RemoveAll(p.OutputPath)
+	}
 
-	if _, err := os.Stat(p.OutputPath); !os.IsNotExist(err) {
+	if _, err := os.Stat(p.OutputPath); !os.IsNotExist(err) && !p.ForceMode {
 		return errors.New("output path already exists")
 	}
 
-	// create neccessary subpaths
+	// create necessary subpaths
 	folders := []string{"css", "zip"}
 
 	for _, f := range folders {
@@ -175,9 +157,4 @@ func (p Presskit) generateStaticFiles() error {
 		return err
 	}
 	return nil
-}
-
-// Clean removes the output folder and should only be called on error
-func (p Presskit) Clean() {
-	os.RemoveAll(p.OutputPath)
 }

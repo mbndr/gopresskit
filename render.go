@@ -6,11 +6,9 @@ import (
 )
 
 // companyData is given to a company template
-// TODO not happy with outputPath here
 type companyData struct {
-	Company    company
-	Media      media
-	outputPath string
+	Company company
+	Media   media
 }
 
 // gameData is given to a game template
@@ -20,13 +18,13 @@ type gameData struct {
 }
 
 // renderCompany renders a company html
-func renderCompany(c company, m media, outputPath string) ([]byte, error) {
+// TODO: base and company template (remove company-game redundancy)
+func renderCompany(c company, m media) ([]byte, error) {
 	var buf bytes.Buffer
 
 	data := companyData{
-		outputPath: outputPath,
-		Company:    c,
-		Media:      m,
+		Company: c,
+		Media:   m,
 	}
 
 	// read template
@@ -35,7 +33,6 @@ func renderCompany(c company, m media, outputPath string) ([]byte, error) {
 		return nil, err
 	}
 
-	//t, err := template.ParseFiles("./static/templates/base.html")
 	t, err := template.New("company").Parse(string(tplData))
 	if err != nil {
 		return nil, err
@@ -49,7 +46,7 @@ func renderCompany(c company, m media, outputPath string) ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
-// renderCompany renders a game html
+// renderGame renders a game html
 func renderGame(c company, g game) ([]byte, error) {
 	return []byte(""), nil
 }

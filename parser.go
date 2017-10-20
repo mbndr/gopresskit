@@ -4,10 +4,11 @@ import (
 	"encoding/xml"
 )
 
+// Parser parses all data files
 type Parser interface {
 	Extension() string
 	Company([]byte) (*company, error)
-	//Games() []game
+	Game([]byte) (*game, error)
 }
 
 // XMLParser parses the data from xml files
@@ -28,7 +29,7 @@ func (p XMLParser) Company(data []byte) (*company, error) {
 	return &c, nil
 }
 
-// Games parses all game data
-/*func (p XMLParser) Games() []Game {
-	return nil
-}*/
+// Games parses data of a game
+func (p XMLParser) Game(data []byte) (*game, error) {
+	return nil, nil
+}

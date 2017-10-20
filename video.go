@@ -19,12 +19,14 @@ const (
 	vimeoLink   = "https://vimeo.com/"
 )
 
+// video holds video information
 type video struct {
 	Title  string `xml:"title"`
 	Source string `xml:"source"` // Youtube etc
 	Id     string `xml:"id"`     // e.g. youtube/vimeo id or path to local video
 }
 
+// Embed returns the embed html of a video
 func (v video) Embed() template.HTML {
 	switch v.Source {
 	case "youtube":
@@ -37,6 +39,7 @@ func (v video) Embed() template.HTML {
 	return html("<b>No valid video source</b>")
 }
 
+// Link returns the direct link to a video
 func (v video) Link() template.HTML {
 	switch v.Source {
 	case "youtube":
@@ -51,7 +54,7 @@ func (v video) Link() template.HTML {
 
 // UseIframeContainer checks if for the video source an css class
 // "iframe-container" has to be added to display the video properly
-// TODO understand why
+// TODO understand why (css)
 func (v video) UseIframeContainer() bool {
 	switch v.Source {
 	case "youtube":

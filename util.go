@@ -12,6 +12,7 @@ import (
 	"path/filepath"
 )
 
+// html is a shortcut for returning a formatet html object
 func html(format string, a ...interface{}) template.HTML {
 	return template.HTML(fmt.Sprintf(format, a...))
 }
@@ -57,7 +58,7 @@ func copyDir(source, destination string) error {
 	return nil
 }
 
-// zipFiles zips a list of files and returns the zips data
+// zipFiles zips a list of files and returns the zip data
 func zipFiles(basepath string, files []string) ([]byte, error) {
 	buf := new(bytes.Buffer)
 
@@ -90,7 +91,7 @@ func zipFiles(basepath string, files []string) ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
-// writeFile is a shortcut because of file permissions
+// writeFile is a shortcut for ioutil.WriteFile because of file permissions
 func writeFile(path string, data []byte) error {
 	return ioutil.WriteFile(path, data, 0644)
 }
