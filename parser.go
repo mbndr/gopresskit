@@ -29,7 +29,7 @@ func (p XMLParser) Company(data []byte) (*company, error) {
 	return &c, nil
 }
 
-// Games parses data of a game
+// Game parses data of a game
 func (p XMLParser) Game(data []byte) (*game, error) {
 	return nil, nil
 }

@@ -1,5 +1,8 @@
 # Gopresskit
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/mbndr/gopresskit)](https://goreportcard.com/report/github.com/mbndr/gopresskit)
+
+
  > **Very early in development**  
  > Completely inspired by [presskit()](https://github.com/ramiismail/dopresskit), more documentation soon.  
  > Currently only the company presskit is generated.
