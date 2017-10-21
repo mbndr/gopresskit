@@ -4,5 +4,4 @@
 
 rootPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
 
-# TODO remove debug flag
-go-bindata -debug -prefix "static/" -pkg "presskit" -o "$rootPath/bindata.go" "$rootPath/static/..."
+go-bindata -prefix "static/" -pkg "presskit" -o "$rootPath/bindata.go" "$rootPath/static/..."

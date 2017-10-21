@@ -4,6 +4,7 @@ import (
 	"errors"
 	"io/ioutil"
 	"os"
+
 	//"github.com/sanity-io/litter"
 )
 
@@ -11,13 +12,10 @@ import (
 type Presskit struct {
 	// parser manages the parsing from the data file (e.g. company.xml) to a company object
 	Parser Parser
-
 	// input paths contains the company data, games and assets
 	InputPath string
-
 	// output path contains all generated data
 	OutputPath string
-
 	// if enabled, the output folder will removed and overwritten instead of a error
 	ForceMode bool
 }
@@ -42,11 +40,18 @@ func (p Presskit) Generate() error {
 		return err
 	}
 
-	// process company
-	c, err := p.processCompany()
+	// parse company data file
+	fileData, err := ioutil.ReadFile(join(p.InputPath, "company."+p.Parser.Extension()))
 	if err != nil {
 		return err
 	}
+	c, err := p.Parser.Company(fileData)
+	if err != nil {
+		return err
+	}
+
+	// storage of game slug and title (for releases section in company)
+	gameList := make(map[string]string)
 
 	// process games
 	files, err := ioutil.ReadDir(join(p.InputPath, "games"))
@@ -54,10 +59,18 @@ func (p Presskit) Generate() error {
 		return err
 	}
 	for _, f := range files {
-		err := p.processGame(f, *c)
+		g, err := p.processGame(f, *c)
 		if err != nil {
 			return err
 		}
+		// add game to game list
+		gameList[f.Name()] = g.Title
+	}
+
+	// process company
+	err = p.processCompany(*c, gameList)
+	if err != nil {
+		return err
 	}
 
 	// generate static files (css etc)
@@ -70,7 +83,7 @@ func (p Presskit) Generate() error {
 }
 
 // processCompany processes the company level
-func (p Presskit) processCompany() (*company, error) {
+func (p Presskit) processCompany(c company, gl map[string]string) error {
 	// copy media directories
 	for _, d := range []string{"images", "videos"} {
 		copyDir(
@@ -79,48 +92,33 @@ func (p Presskit) processCompany() (*company, error) {
 		)
 	}
 
-	// parse data file
-	fileData, err := ioutil.ReadFile(join(p.InputPath, "company."+p.Parser.Extension()))
-	if err != nil {
-		return nil, err
-	}
-	company, err := p.Parser.Company(fileData)
-	if err != nil {
-		return nil, err
-	}
-
 	// used medias
-	media, err := newMedia(p.OutputPath, *company)
+	media, err := newMedia(p.OutputPath, c)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	// generate image zip files
 	err = media.generateZip(p.OutputPath)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	// get a list of game titles to compile into company template
-	// without this processCompany and processGame couldn't be outsourced
-	// TODO not optimal
-	gameList := p.gameList()
-
 	// render html
-	html, err := renderCompany(*company, *media, gameList)
+	html, err := renderCompany(c, *media, gl)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	err = writeFile(join(p.OutputPath, "index.html"), html)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	return company, nil
+	return nil
 }
 
 // processGame processes a game level
-func (p Presskit) processGame(f os.FileInfo, c company) error {
+func (p Presskit) processGame(f os.FileInfo, c company) (*game, error) {
 	// path of the game data
 	gameInputPath := join(p.InputPath, "games", f.Name())
 	gameOutputPath := join(p.OutputPath, "games", f.Name())
@@ -128,7 +126,7 @@ func (p Presskit) processGame(f os.FileInfo, c company) error {
 	// setup base folder structure
 	err := p.setupOutputFolder(gameOutputPath, []string{"zip"})
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	// copy media directories
@@ -142,36 +140,36 @@ func (p Presskit) processGame(f os.FileInfo, c company) error {
 	// parse data file
 	fileData, err := ioutil.ReadFile(join(gameInputPath, "game."+p.Parser.Extension()))
 	if err != nil {
-		return err
+		return nil, err
 	}
-	game, err := p.Parser.Game(fileData)
+	g, err := p.Parser.Game(fileData)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	// used medias
-	media, err := newMedia(gameOutputPath, *game)
+	media, err := newMedia(gameOutputPath, *g)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	// generate image zip files
 	err = media.generateZip(gameOutputPath)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	// render html
-	html, err := renderGame(c, *game, *media)
+	html, err := renderGame(c, *g, *media)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	err = writeFile(join(gameOutputPath, "index.html"), html)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	return nil
+	return g, nil
 }
 
 // setupOutputFolder creates the output folder and a few subdirs.
@@ -206,20 +204,4 @@ func (p Presskit) generateStaticFiles() error {
 		return err
 	}
 	return nil
-}
-
-// get a list of only the game titles (only temporary)
-// TODO this file reading is way to redundant to above!
-func (p Presskit) gameList() map[string]string {
-	list := make(map[string]string)
-
-	files, _ := ioutil.ReadDir(join(p.InputPath, "games"))
-	for _, f := range files {
-		// parse data file
-		fileData, _ := ioutil.ReadFile(join(p.InputPath, "games", f.Name(), "game."+p.Parser.Extension()))
-		game, _ := p.Parser.Game(fileData)
-		list[f.Name()] = game.Title
-	}
-
-	return list
 }
