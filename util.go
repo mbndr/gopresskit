@@ -17,6 +17,28 @@ func html(format string, a ...interface{}) template.HTML {
 	return template.HTML(fmt.Sprintf(format, a...))
 }
 
+// copyFile copies a single file
+func copyFile(source, destination string) error {
+	// open source file
+	sf, err := os.Open(source)
+	if err != nil {
+		return err
+	}
+	// create destination file
+	df, err := os.Create(destination)
+	if err != nil {
+		return err
+	}
+	// copy
+	_, err = io.Copy(df, sf)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+
 // copyDir copies all files in a directory (not recursively)
 func copyDir(source, destination string) error {
 	// get source properties
@@ -39,17 +61,10 @@ func copyDir(source, destination string) error {
 
 	for _, f := range files {
 		// open source file
-		sf, err := os.Open(filepath.Join(source, f.Name()))
-		if err != nil {
-			return err
-		}
-		// create destination file
-		df, err := os.Create(filepath.Join(destination, f.Name()))
-		if err != nil {
-			return err
-		}
-		// copy
-		_, err = io.Copy(df, sf)
+		err := copyFile(
+			join(source, f.Name()),
+			join(destination, f.Name()),
+		)
 		if err != nil {
 			return err
 		}

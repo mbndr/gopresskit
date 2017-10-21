@@ -40,6 +40,12 @@ func (p Presskit) Generate() error {
 		return err
 	}
 
+	// copy favicon
+	err = p.copyFavicon()
+	if err != nil {
+		return err
+	}
+
 	// parse company data file
 	fileData, err := ioutil.ReadFile(join(p.InputPath, "company."+p.Parser.Extension()))
 	if err != nil {
@@ -203,5 +209,26 @@ func (p Presskit) generateStaticFiles() error {
 	if err != nil {
 		return err
 	}
+	return nil
+}
+
+func (p Presskit) copyFavicon() error {
+	faviconPath := join(p.OutputPath, "favicon.ico")
+
+	// try to copy
+	err := copyFile(join(p.InputPath, "favicon.ico"), faviconPath)
+
+	// if no icon found, write default favicon
+	if err != nil {
+		icoData, err := Asset("favicon.ico")
+		if err != nil {
+			return err
+		}
+		err = writeFile(faviconPath, icoData)
+		if err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
