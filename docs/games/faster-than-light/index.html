@@ -4,8 +4,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/uikit.gradient.min.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-	<title>My Company</title>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
+	<title>Faster than light - My Company</title>
 </head>
 <body>
 
@@ -14,7 +14,16 @@
 
             <div id="navigation" class="uk-width-medium-1-4">
                 <h1 class="nav-header">My Company</h1>
-                <a class="nav-header" href="http://example.com">example.com</a>
+                <a class="nav-header" id="presskit-link" href="#js-required">press kit</a>
+				<script>
+				
+				var path = window.location.pathname;
+				var pathlist = path.split("/");
+				var subpathlist = pathlist.slice(-3, -1);
+				var subpath = subpathlist.join("/") + "/";
+				var rootpath = path.replace(subpath, "");
+				document.getElementById("presskit-link").href = rootpath;
+				</script>
                 <ul class="uk-nav uk-nav-side">
 
                         <li><a href="#factsheet">Factsheet</a></li>
@@ -75,8 +84,25 @@
 
 						
 	                        <p>
-	                            <b>Founding Date:</b><br>
-	                            March 2018
+	                            <b>Release Dates:</b><br>
+	                            
+									PC/Mac - 04 Feb, 2016<br>
+								
+									iOS/Android - 04 Feb, 2017<br>
+								
+	                        </p>
+						
+
+						
+	                        <p>
+	                            <b>Platforms:</b><br>
+	                            
+									<a href="http://www.gamesite.com/">PC / Mac</a><br>
+								
+									<a href="http://www.steampowered.com/">Steam</a><br>
+								
+									<a href="http://www.itunes.com/">Apple App Store</a><br>
+								
 	                        </p>
 						
 
@@ -89,61 +115,28 @@
 
 						
 	                        <p>
-	                            <b>Press / Business contact:</b><br>
-	                            <a href="mailto:hello@example.com">hello@example.com</a>
-	                        </p>
-						
-
-						
-                        <p>
-                            <b>Social:</b><br>
-                            
-								<a href="https://www.facebook.com/example">Facebook</a><br>
-							
-								<a href="https://www.twitter.com/example">Twitter</a><br>
-							
-                        </p>
-						
-
-						
-	                        <p>
-	                            <b>Releases:</b><br>
+	                            <b>Prices:</b><br>
+	                            
+									USD $1.99<br>
 								
-									<a href="games/faster-than-light/">Faster than light</a><br>
+									EUR €1.59<br>
+								
+									CAD $1.99<br>
+								
+									GBP £1.29<br>
 								
 	                        </p>
 						
 
-						
-	                        <p>
-	                            <b>Address:</b><br>
-								
-									Teststreet 69<br>
-								
-									12345 Demotown<br>
-								
-	                        </p>
-						
-
-						
-                        <p>
-                            <b>Phone:</b><br>
-                            &#43;12 (0) 2345678
-                        </p>
-						
                     </div>
 
                     <div class="uk-width-medium-4-6">
 
 						
 	                        <h2 id="description">Description</h2>
-	                        <p>Animi quo eveniet placeat at est. In eveniet corrupti in mollitia consequatur. Consequatur et neque laudantium. Velit dignissimos nostrum voluptatem dolores reprehenderit. Ea consequatur rerum excepturi quia accusantium ut.
-
-Tenetur voluptatem et tempora est. Accusantium labore et soluta illum harum autem in. Fugiat aperiam occaecati ipsam. Iste facilis adipisci rem delectus. Dolore et ut laboriosam quis. Commodi aut animi optio quaerat.
-
-Molestias et et id eos. Et earum autem praesentium quis at ratione quo. Modi et qui quos sed accusamus suscipit consequuntur dolor. Quia itaque mollitia incidunt rerum sint quam saepe. Ea deserunt voluptatibus quia ut harum quis. Et debitis ratione accusamus atque sed ex sed.
-
-Ut qui et eveniet. Est ut occaecati sit et rem. Esse sit ullam et dolores natus eos fugiat. Iste sunt laboriosam earum est eaque fuga et. Officiis dolores dolorem omnis. Qui sapiente cumque aut et quod.</p>
+	                        <p>
+    	Hello. This is a short compilation of facts about the game. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
 						
 
 						
@@ -155,6 +148,23 @@ Ut qui et eveniet. Est ut occaecati sit et rem. Esse sit ullam et dolores natus 
 								<b>Second section</b>
 								<p>Animi quo eveniet placeat at est. In eveniet corrupti in mollitia consequatur. Consequatur et neque laudantium. Velit dignissimos nostrum voluptatem dolores reprehenderit. Ea consequatur rerum excepturi quia accusantium ut.</p>
 							
+						
+
+						
+                        	<h2 id="history">Features</h2>
+							<ul>
+								
+									<li>Includes something really interesting about the game which players will love.</li>
+								
+									<li>This feature line is about the 8-bit pixels that are no doubt featuring in this game.</li>
+								
+									<li>Since it is unlikely that the audio isn&#39;t fucking amazing, say something about the audio, maybe?</li>
+								
+									<li>Make sure to stress that everything about this game is absolutely fabulous.</li>
+								
+									<li>Something to wrap up this 5-point feature list with a nice ring to it.</li>
+								
+							</ul>
 						
 
                     </div>
@@ -178,23 +188,12 @@ Ut qui et eveniet. Est ut occaecati sit et rem. Esse sit ullam et dolores natus 
 							</div>
 						</p>
 					
-						<p>
-							<b>Big Buck Bunny</b> (<a href="videos/Big__Buck__Bunny.mp4">MP4</a>)<br>
-							<div class="uk-responsive-width ">
-								
-		<video controls>
-			<source src="videos/Big__Buck__Bunny.mp4" type="video/mp4">
-			Your browser does not support HTML5 video.
-		</video>
-							</div>
-						</p>
-					
 					<hr>
 				
 
 				
 					<h2 id="images">Images</h2>
-					<a href="zip/images.zip"><div class="uk-alert">download all images as zip archive (711.4K)</div></a>
+					<a href="zip/images.zip"><div class="uk-alert">download all images as zip archive (295.3K)</div></a>
 					<div class="uk-grid images">
 						
 							<div class="uk-width-medium-1-2">
@@ -215,38 +214,8 @@ Ut qui et eveniet. Est ut occaecati sit et rem. Esse sit ullam et dolores natus 
 								</a>
 							</div>
 						
-							<div class="uk-width-medium-1-2">
-								<a href="images/ITB_ss_3.png">
-									<img src="images/ITB_ss_3.png">
-								</a>
-							</div>
-						
-							<div class="uk-width-medium-1-2">
-								<a href="images/ITB_ss_4.png">
-									<img src="images/ITB_ss_4.png">
-								</a>
-							</div>
-						
-							<div class="uk-width-medium-1-2">
-								<a href="images/ITB_ss_5.png">
-									<img src="images/ITB_ss_5.png">
-								</a>
-							</div>
-						
-							<div class="uk-width-medium-1-2">
-								<a href="images/ITB_ss_6.png">
-									<img src="images/ITB_ss_6.png">
-								</a>
-							</div>
-						
-							<div class="uk-width-medium-1-2">
-								<a href="images/ITB_ss_7.png">
-									<img src="images/ITB_ss_7.png">
-								</a>
-							</div>
-						
 					</div>
-					<p>There are far more images available for My Company, but these are the ones we felt would be most useful to you. If you have specific requests, please do <a href="#factsheet">contact us</a>!</p>
+					<p>There are far more images available for Faster than light, but these are the ones we felt would be most useful to you. If you have specific requests, please do <a href="#factsheet">contact us</a>!</p>
 					<hr>
 				
 

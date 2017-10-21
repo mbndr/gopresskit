@@ -31,5 +31,10 @@ func (p XMLParser) Company(data []byte) (*company, error) {
 
 // Game parses data of a game
 func (p XMLParser) Game(data []byte) (*game, error) {
-	return nil, nil
+	var g game
+	err := xml.Unmarshal(data, &g)
+	if err != nil {
+		return nil, err
+	}
+	return &g, nil
 }

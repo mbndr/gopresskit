@@ -7,8 +7,9 @@ import (
 
 // companyData is given to a company template
 type companyData struct {
-	Company company
-	Media   media
+	Company  company
+	Media    media
+	GameList map[string]string
 }
 
 // gameData is given to a game template
@@ -17,23 +18,17 @@ type gameData struct {
 	Game game
 }
 
-// renderCompany renders a company html
-// TODO: base and company template (remove company-game redundancy)
-func renderCompany(c company, m media) ([]byte, error) {
+// render renders a template with given data
+func render(tplName string, data interface{}) ([]byte, error) {
 	var buf bytes.Buffer
 
-	data := companyData{
-		Company: c,
-		Media:   m,
-	}
-
 	// read template
-	tplData, err := Asset("templates/base.html")
+	tplData, err := Asset("templates/" + tplName + ".html")
 	if err != nil {
 		return nil, err
 	}
 
-	t, err := template.New("company").Parse(string(tplData))
+	t, err := template.New(tplName).Parse(string(tplData))
 	if err != nil {
 		return nil, err
 	}
@@ -47,6 +42,21 @@ func renderCompany(c company, m media) ([]byte, error) {
 }
 
 // renderGame renders a game html
-func renderGame(c company, g game) ([]byte, error) {
-	return []byte(""), nil
+func renderGame(c company, g game, m media) ([]byte, error) {
+	return render("game", gameData{
+		companyData: companyData{
+			Company: c,
+			Media:   m,
+		},
+		Game: g,
+	})
+}
+
+// renderCompany renders a company html
+func renderCompany(c company, m media, gl map[string]string) ([]byte, error) {
+	return render("company", companyData{
+		Company:  c,
+		Media:    m,
+		GameList: gl,
+	})
 }

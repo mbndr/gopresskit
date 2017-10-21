@@ -26,7 +26,7 @@ type media struct {
 }
 
 // newMedia reads all images and videos
-func newMedia(path string, c company) (*media, error) {
+func newMedia(path string, h videoHolder) (*media, error) {
 	var m media
 
 	// images
@@ -50,13 +50,10 @@ func newMedia(path string, c company) (*media, error) {
 	}
 
 	// copy external videos
-	m.Videos = c.Videos
+	m.Videos = h.GetVideos()
 
-	// add local videos
-	videos, err := ioutil.ReadDir(join(path, videoDir))
-	if err != nil {
-		return nil, err
-	}
+	// add local videos (err if no folder)
+	videos, _ := ioutil.ReadDir(join(path, videoDir))
 	for _, f := range videos {
 		ext := filepath.Ext(f.Name())
 		// trim extension
@@ -117,4 +114,19 @@ func (m media) HasLogoOrIcon() bool {
 		return false
 	}
 	return true
+}
+
+// videoHolder is used to get the videos from both game and company in newMedia
+type videoHolder interface {
+	GetVideos() []video
+}
+
+// GetVideos returns all videos of the data file
+func (c company) GetVideos() []video {
+	return c.Videos
+}
+
+// GetVideos returns all videos of the data file
+func (g game) GetVideos() []video {
+	return g.Videos
 }

@@ -65,6 +65,11 @@ func zipFiles(basepath string, files []string) ([]byte, error) {
 	z := zip.NewWriter(buf)
 
 	for _, p := range files {
+		// if no file is given (e.g. icon and logo), don't try to read the directory
+		if p == "" {
+			continue
+		}
+
 		fullPath := join(basepath, p)
 		// add to zip
 		f, err := z.Create(path.Base(p))

@@ -4,8 +4,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/uikit.gradient.min.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-	<title>{{ .Company.Title }}</title>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
+	<title>{{ .Game.Title }} - {{ .Company.Title }}</title>
 </head>
 <body>
 
@@ -14,16 +14,25 @@
 
             <div id="navigation" class="uk-width-medium-1-4">
                 <h1 class="nav-header">{{ .Company.Title }}</h1>
-                <a class="nav-header" href="{{ .Company.Website.Link }}">{{ .Company.Website.Label }}</a>
+                <a class="nav-header" id="presskit-link" href="#js-required">press kit</a>
+				<script>
+				// TODO is this possible without javascript?
+				var path = window.location.pathname;
+				var pathlist = path.split("/");
+				var subpathlist = pathlist.slice(-3, -1);
+				var subpath = subpathlist.join("/") + "/";
+				var rootpath = path.replace(subpath, "");
+				document.getElementById("presskit-link").href = rootpath;
+				</script>
                 <ul class="uk-nav uk-nav-side">
 
                         <li><a href="#factsheet">Factsheet</a></li>
 
-						{{if .Company.Description}}
+						{{if .Game.Description}}
                         	<li><a href="#description">Description</a></li>
 						{{end}}
 
-						{{if .Company.History}}
+						{{if .Game.History}}
 							<li><a href="#history">History</a></li>
 						{{end}}
 
@@ -39,11 +48,11 @@
 							<li><a href="#logo">Logo &amp; Icon</a></li>
 						{{end}}
 
-						{{if .Company.Quotes}}
+						{{if .Game.Quotes}}
 							<li><a href="#quotes">Selected Articles</a></li>
 						{{end}}
 
-						{{if .Company.Credits}}
+						{{if .Game.Credits}}
 							<li><a href="#team">Team</a></li>
 						{{end}}
 
@@ -73,10 +82,21 @@
 							{{end}}
                         </p>
 
-						{{if .Company.FoundingDate}}
+						{{if .Game.ReleaseDates}}
 	                        <p>
-	                            <b>Founding Date:</b><br>
-	                            March 2018
+	                            <b>Release Dates:</b><br>
+	                            {{range .Game.ReleaseDates}}
+									{{ . }}<br>
+								{{end}}
+	                        </p>
+						{{end}}
+
+						{{if .Game.Platforms}}
+	                        <p>
+	                            <b>Platforms:</b><br>
+	                            {{range .Game.Platforms}}
+									<a href="{{ .Link }}">{{ .Label }}</a><br>
+								{{end}}
 	                        </p>
 						{{end}}
 
@@ -87,57 +107,39 @@
 	                        </p>
 						{{end}}
 
-						{{if .Company.PressContact}}
+						{{if .Game.Prices}}
 	                        <p>
-	                            <b>Press / Business contact:</b><br>
-	                            <a href="mailto:{{ .Company.PressContact }}">{{ .Company.PressContact }}</a>
-	                        </p>
-						{{end}}
-
-						{{if .Company.Social}}
-                        <p>
-                            <b>Social:</b><br>
-                            {{range .Company.Social}}
-								<a href="{{ .Link }}">{{ .Label }}</a><br>
-							{{end}}
-                        </p>
-						{{end}}
-
-                        <p>
-                            <b>Releases:</b><br>
-							TODO
-                        </p>
-
-						{{if .Company.Address}}
-	                        <p>
-	                            <b>Address:</b><br>
-								{{range .Company.Address}}
+	                            <b>Prices:</b><br>
+	                            {{range .Game.Prices}}
 									{{ . }}<br>
 								{{end}}
 	                        </p>
 						{{end}}
 
-						{{if .Company.Phone}}
-                        <p>
-                            <b>Phone:</b><br>
-                            {{ .Company.Phone }}
-                        </p>
-						{{end}}
                     </div>
 
                     <div class="uk-width-medium-4-6">
 
-						{{if .Company.Description}}
+						{{if .Game.Description}}
 	                        <h2 id="description">Description</h2>
-	                        <p>{{ .Company.Description }}</p>
+	                        <p>{{ .Game.Description }}</p>
 						{{end}}
 
-						{{if .Company.History}}
+						{{if .Game.History}}
                         	<h2 id="history">History</h2>
-							{{range .Company.History}}
+							{{range .Game.History}}
 								<b>{{ .Header }}</b>
 								<p>{{ .Text }}</p>
 							{{end}}
+						{{end}}
+
+						{{if .Game.Features}}
+                        	<h2 id="history">Features</h2>
+							<ul>
+								{{range .Game.Features}}
+									<li>{{ . }}</li>
+								{{end}}
+							</ul>
 						{{end}}
 
                     </div>
@@ -169,7 +171,7 @@
 							</div>
 						{{ end }}
 					</div>
-					<p>There are far more images available for {{ .Company.Title }}, but these are the ones we felt would be most useful to you. If you have specific requests, please do <a href="#factsheet">contact us</a>!</p>
+					<p>There are far more images available for {{ .Game.Title }}, but these are the ones we felt would be most useful to you. If you have specific requests, please do <a href="#factsheet">contact us</a>!</p>
 					<hr>
 				{{end}}
 
@@ -195,10 +197,10 @@
 					<hr>
 				{{end}}
 
-				{{if .Company.Awards}}
+				{{if .Game.Awards}}
 					<h2 id="quotes">Awards &amp; Recognition</h2>
 					<ul>
-						{{ range .Company.Awards }}
+						{{ range .Game.Awards }}
 							<li>"{{ .Description }}"<br>
 								<cite>- {{ .Info }}</cite>
 							</li>
@@ -207,10 +209,10 @@
 					<hr>
 				{{ end }}
 
-				{{if .Company.Quotes}}
+				{{if .Game.Quotes}}
 					<h2 id="quotes">Selected Articles</h2>
 					<ul>
-						{{ range .Company.Quotes }}
+						{{ range .Game.Quotes }}
 							<li>"{{ .Text }}"<br>
 								<cite>- {{ .From }}</cite>
 								<a href="{{ .Link.Link }}">{{ .Link.Label }}</a>
@@ -220,9 +222,9 @@
 					<hr>
 				{{ end }}
 
-				{{if .Company.Additionals}}
+				{{if .Game.Additionals}}
 					<h2 id="quotes">Additional Links</h2>
-					{{ range .Company.Additionals }}
+					{{ range .Game.Additionals }}
 						<p>
 							<b>{{ .Title }}</b><br>
 							{{ .Description }} available at&nbsp;
@@ -233,10 +235,10 @@
 				{{ end }}
 
 				<div class="uk-grid">
-					{{if .Company.Credits}}
+					{{if .Game.Credits}}
 						<div class="uk-width-medium-1-2">
 							<h2 id="team">Team &amp; Repeating Collaborators</h2>
-							{{ range .Company.Credits }}
+							{{ range .Game.Credits }}
 								<p>
 									<b>{{ .Person }}</b><br>
 									<a href="{{ .Link }}">{{ .Role }}</a>
