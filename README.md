@@ -1,5 +1,6 @@
 # Gopresskit
 
+[![Build Status](https://travis-ci.org/mbndr/logo.svg?branch=master)](https://travis-ci.org/mbndr/logo)
 [![Go Report Card](https://goreportcard.com/badge/github.com/mbndr/gopresskit)](https://goreportcard.com/report/github.com/mbndr/gopresskit)
 [![cover.run go](https://cover.run/go/github.com/mbndr/gopresskit.svg)](https://cover.run/go/github.com/mbndr/gopresskit)
 
