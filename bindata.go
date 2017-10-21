@@ -203,10 +203,10 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
-	"css/style.css": cssStyleCss,
-	"favicon.ico": faviconIco,
+	"css/style.css":          cssStyleCss,
+	"favicon.ico":            faviconIco,
 	"templates/company.html": templatesCompanyHtml,
-	"templates/game.html": templatesGameHtml,
+	"templates/game.html":    templatesGameHtml,
 }
 
 // AssetDir returns the file names below a certain
@@ -248,14 +248,15 @@ type bintree struct {
 	Func     func() (*asset, error)
 	Children map[string]*bintree
 }
+
 var _bintree = &bintree{nil, map[string]*bintree{
-	"css": &bintree{nil, map[string]*bintree{
-		"style.css": &bintree{cssStyleCss, map[string]*bintree{}},
+	"css": {nil, map[string]*bintree{
+		"style.css": {cssStyleCss, map[string]*bintree{}},
 	}},
-	"favicon.ico": &bintree{faviconIco, map[string]*bintree{}},
-	"templates": &bintree{nil, map[string]*bintree{
-		"company.html": &bintree{templatesCompanyHtml, map[string]*bintree{}},
-		"game.html": &bintree{templatesGameHtml, map[string]*bintree{}},
+	"favicon.ico": {faviconIco, map[string]*bintree{}},
+	"templates": {nil, map[string]*bintree{
+		"company.html": {templatesCompanyHtml, map[string]*bintree{}},
+		"game.html":    {templatesGameHtml, map[string]*bintree{}},
 	}},
 }}
 
@@ -305,4 +306,3 @@ func _filePath(dir, name string) string {
 	cannonicalName := strings.Replace(name, "\\", "/", -1)
 	return filepath.Join(append([]string{dir}, strings.Split(cannonicalName, "/")...)...)
 }
-

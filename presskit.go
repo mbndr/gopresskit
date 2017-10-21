@@ -4,7 +4,6 @@ import (
 	"errors"
 	"io/ioutil"
 	"os"
-
 	//"github.com/sanity-io/litter"
 )
 
@@ -212,6 +211,7 @@ func (p Presskit) generateStaticFiles() error {
 	return nil
 }
 
+// copyFavicon copies given favicon or the default one
 func (p Presskit) copyFavicon() error {
 	faviconPath := join(p.OutputPath, "favicon.ico")
 

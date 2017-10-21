@@ -38,7 +38,6 @@ func copyFile(source, destination string) error {
 	return nil
 }
 
-
 // copyDir copies all files in a directory (not recursively)
 func copyDir(source, destination string) error {
 	// get source properties
