@@ -197,17 +197,20 @@ func (p Presskit) setupOutputFolder(outputPath string, folders []string) error {
 }
 
 // generateStaticFiles generates all needed files stored binary
-// TODO list of files to generate if more files are added
 func (p Presskit) generateStaticFiles() error {
-	cssFile := "css/style.css"
-	style, err := Asset(cssFile)
-	if err != nil {
-		return err
+	for _, path := range []string{"css/style.css", "css/uikit.gradient.min.css"} {
+		// get content
+		raw, err := Asset(path)
+		if err != nil {
+			return err
+		}
+		// write file
+		err = writeFile(join(p.OutputPath, path), raw)
+		if err != nil {
+			return err
+		}
 	}
-	err = writeFile(join(p.OutputPath, cssFile), style)
-	if err != nil {
-		return err
-	}
+
 	return nil
 }
 
