@@ -30,11 +30,7 @@ func newMedia(path string, h videoHolder) (*media, error) {
 	var m media
 
 	// images
-	images, err := ioutil.ReadDir(join(path, imageDir))
-	if err != nil {
-		return nil, err
-	}
-
+	images, _ := ioutil.ReadDir(join(path, imageDir))
 	for _, f := range images {
 		// use only base name to identify usage
 		switch strings.TrimSuffix(f.Name(), filepath.Ext(f.Name())) {
