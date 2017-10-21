@@ -13,6 +13,7 @@ type game struct {
 	ReleaseDates     []string `xml:"release-dates>release-date"`
 	Website          link     `xml:"website"`
 	PressRequestCopy bool     `xml:"press-can-request-copy"`
+	Monetize string     `xml:"monetization-permission"`
 	Platforms        []link   `xml:"platforms>platform"`
 	Prices           []string `xml:"prices>price"`
 	Features         []string `xml:"features>feature"`

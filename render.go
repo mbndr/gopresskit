@@ -60,3 +60,18 @@ func renderCompany(c company, m media, gl map[string]string) ([]byte, error) {
 		GameList: gl,
 	})
 }
+
+// MonetizeText returns the monetization permission text depending on the config
+// TODO a bit messy
+func (gd gameData) MonetizeText() template.HTML {
+	switch gd.Game.Monetize {
+	case "false":
+		return html("%s does currently not allow for the contents of %s to be published through video broadcasting services.", gd.Company.Title, gd.Game.Title)
+	case "non-commercial":
+		return html("%s allows for the contents of %s to be published through video broadcasting services for non-commercial purposes only. Monetization of any video created containing assets from %s is not allowed.", gd.Company.Title, gd.Game.Title, gd.Game.Title)
+	case "monetize":
+		return html("%s allows for the contents of %s to be published through video broadcasting services for any commercial or non-commercial purposes. Monetization of videos created containing assets from %s is legally & explicitly allowed by %s. This permission can be found in <a href=\"#contact\">writing at %s</a>.", gd.Company.Title, gd.Game.Title, gd.Game.Title, gd.Company.Title, gd.Company.Title)
+	default: // originally "ask", bit if something fails, you should always ask
+		return html("%s does allow the contents of this game to be published through video broadcasting services only with direct written permission from <a href=\"#contact\">%s</a>.", gd.Company.Title, gd.Company.Title)
+	}
+}

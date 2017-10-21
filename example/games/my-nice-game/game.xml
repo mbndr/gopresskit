@@ -12,7 +12,7 @@
         <link>http://example.com</link>
     </website>
     <press-can-request-copy>true</press-can-request-copy>
-    <monetization-permission>ask</monetization-permission>
+    <monetization-permission>monetize</monetization-permission>
     <platforms>
         <platform>
             <label>PC / Mac</label>

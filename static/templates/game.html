@@ -53,6 +53,14 @@
 							<li><a href="#quotes">Selected Articles</a></li>
 						{{end}}
 
+						{{if .Game.PressRequestCopy}}
+							<li><a href="#preview">Request Press Copy</a></li>
+						{{end}}
+
+						{{if .Game.Monetize}}
+							<li><a href="#monetize">Monetization Permission</a></li>
+						{{end}}
+
 						{{if .Game.Credits}}
 							<li><a href="#team">Team</a></li>
 						{{end}}
@@ -222,6 +230,18 @@
 					</ul>
 					<hr>
 				{{ end }}
+
+				{{if .Game.PressRequestCopy}}
+					<h2 id="preview">Request Press Copy</h2>
+					<p>You can always request a press copy by <a href="#contact">sending us a quick email</a>.</p>
+					<hr>
+				{{end}}
+
+				{{if .Game.Monetize}}
+					<h2 id="monetize">Monetization Permission</h2>
+					<p>{{ .MonetizeText }}</p>
+					<hr>
+				{{end}}
 
 				{{if .Game.Additionals}}
 					<h2 id="quotes">Additional Links</h2>
