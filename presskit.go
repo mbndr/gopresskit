@@ -27,7 +27,7 @@ func (p Presskit) Generate() error {
 	}
 
 	// setup base folder structure
-	err := p.setupOutputFolder(p.OutputPath, []string{"zip", "css"})
+	err := p.setupOutputFolder(p.OutputPath, []string{"zip", "css", "js"})
 	if err != nil {
 		return err
 	}
@@ -198,7 +198,7 @@ func (p Presskit) setupOutputFolder(outputPath string, folders []string) error {
 
 // generateStaticFiles generates all needed files stored binary
 func (p Presskit) generateStaticFiles() error {
-	for _, path := range []string{"css/style.css", "css/uikit.gradient.min.css"} {
+	for _, path := range []string{"css/style.css", "css/uikit.gradient.min.css", "js/mansory.min.js", "js/script.js"} {
 		// get content
 		raw, err := Asset(path)
 		if err != nil {

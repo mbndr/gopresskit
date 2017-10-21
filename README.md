@@ -6,6 +6,14 @@
 
  > Go implementation of [presskit()](https://github.com/ramiismail/dopresskit).
 
+
+## Generation
+To generate your [set up](#installation) presskit you can generate the output files with
+```bash
+gopresskit -input presskit-data/ -output press/
+```
+Run `gopresskit -help` for usage information.
+
 ## Why
 I like the idea of the original presskit() but there are a view things I don't like.
 
@@ -20,8 +28,44 @@ I try to be most compatible with the original presskit() but there are a few con
 
 For easy conversion there might be a future command to migrate presskit() data to the structure of this project.
 
-## Example
-Currently I'm using most images and videos from [subset games](http://subsetgames.com/presskit/sheet.php?p=into_the_breach) for example presentation. All copyright goes to them.
+## Setup
+If you want to generate your presskit you have to create following directory structure in a folder of your choice:
+```
+games/
+    my-game-name/
+        images/
+            _header.png
+            _icon.png
+            _logo.png
+            menu.png
+            ingame.png
+            ...
+        videos/
+            tailer.mp4
+        game.xml
+images/
+    _header.png
+    _icon.png
+    _logo.png
+    office_1.jpg
+    ...
+videos/
+    short-movie.mp4
+company.xml
+favicon.ico
+```
+#### Optional
+All `images/` and `videos/` folders and the `favicon.ico` file are optional and only have to be created if needed.
+
+#### Images
+The three images with an underscore prefix are special images (header, icon, logo) that are displayed in their sections. All other images in an `image/` folder are displayed in the ***Images*** section of the presskit.
+
+#### Videos
+There are two ways of adding videos to your presskit, [using externally hosted ones](#video) or adding your self hosted `mp4` files (other formats can be implemented, feel free to open an [issue](https://github.com/mbndr/gopresskit/issues)). The videos in this folder are like the images automatically added to your presskit's ***Videos*** section.
+
+
+#### xml files
+The `*.xml` files hold the data for your presskit on company and game level. See [configuration](CONFIG.md) for explanation.
 
 ## Testing
 Currently the project has very low coverage. I want to write more unit tests to increase this.  

@@ -4,19 +4,16 @@
     <title>My Company</title>
     <founding-date>March 2017</founding-date>
     <website>
-    	<label>example.com</label>
-    	<link>http://example.com</link>
+        <label>example.com</label>
+        <link>http://example.com</link>
     </website>
     <based-in>Utopia</based-in>
     <press-contact>hello@example.com</press-contact>
     <phone>+12 (0) 2345678</phone>
-    <description>Animi quo eveniet placeat at est. In eveniet corrupti in mollitia consequatur. Consequatur et neque laudantium. Velit dignissimos nostrum voluptatem dolores reprehenderit. Ea consequatur rerum excepturi quia accusantium ut.
-
-Tenetur voluptatem et tempora est. Accusantium labore et soluta illum harum autem in. Fugiat aperiam occaecati ipsam. Iste facilis adipisci rem delectus. Dolore et ut laboriosam quis. Commodi aut animi optio quaerat.
-
-Molestias et et id eos. Et earum autem praesentium quis at ratione quo. Modi et qui quos sed accusamus suscipit consequuntur dolor. Quia itaque mollitia incidunt rerum sint quam saepe. Ea deserunt voluptatibus quia ut harum quis. Et debitis ratione accusamus atque sed ex sed.
-
-Ut qui et eveniet. Est ut occaecati sit et rem. Esse sit ullam et dolores natus eos fugiat. Iste sunt laboriosam earum est eaque fuga et. Officiis dolores dolorem omnis. Qui sapiente cumque aut et quod.</description>
+    <description>Animi quo eveniet placeat at est. In eveniet corrupti in mollitia consequatur. Consequatur et neque laudantium. Velit dignissimos nostrum voluptatem dolores reprehenderit. Ea consequatur rerum excepturi quia accusantium ut. Tenetur
+        voluptatem et tempora est. Accusantium labore et soluta illum harum autem in. Fugiat aperiam occaecati ipsam. Iste facilis adipisci rem delectus. Dolore et ut laboriosam quis. Commodi aut animi optio quaerat. Molestias et et id eos. Et earum autem
+        praesentium quis at ratione quo. Modi et qui quos sed accusamus suscipit consequuntur dolor. Quia itaque mollitia incidunt rerum sint quam saepe. Ea deserunt voluptatibus quia ut harum quis. Et debitis ratione accusamus atque sed ex sed. Ut qui et
+        eveniet. Est ut occaecati sit et rem. Esse sit ullam et dolores natus eos fugiat. Iste sunt laboriosam earum est eaque fuga et. Officiis dolores dolorem omnis. Qui sapiente cumque aut et quod.</description>
     <history>
         <paragraph>
             <header>First section</header>
@@ -24,22 +21,23 @@ Ut qui et eveniet. Est ut occaecati sit et rem. Esse sit ullam et dolores natus 
         </paragraph>
         <paragraph>
             <header>Second section</header>
-            <text>Animi quo eveniet placeat at est. In eveniet corrupti in mollitia consequatur. Consequatur et neque laudantium. Velit dignissimos nostrum voluptatem dolores reprehenderit. Ea consequatur rerum excepturi quia accusantium ut.</text>
+            <text>Molestias et et id eos. Et earum autem praesentium quis at ratione quo. Modi et qui quos sed accusamus suscipit consequuntur dolor. Quia itaque mollitia incidunt rerum sint quam saepe. Ea deserunt voluptatibus quia ut harum quis. Et debitis
+                ratione accusamus atque sed ex sed.</text>
         </paragraph>
     </history>
     <address>
-       <line>Teststreet 69</line>
-       <line>12345 Demotown</line>
-   </address>
+        <line>Teststreet 69</line>
+        <line>12345 Demotown</line>
+    </address>
     <social>
-    	<link>
-    		<label>Facebook</label>
-    		<link>https://www.facebook.com/example</link>
-    	</link>
-    	<link>
-    		<label>Twitter</label>
-    		<link>https://www.twitter.com/example</link>
-    	</link>
+        <link>
+            <label>Facebook</label>
+            <link>https://www.facebook.com/example</link>
+        </link>
+        <link>
+            <label>Twitter</label>
+            <link>https://www.twitter.com/example</link>
+        </link>
     </social>
     <videos>
         <video>
@@ -91,8 +89,8 @@ Ut qui et eveniet. Est ut occaecati sit et rem. Esse sit ullam et dolores natus 
             </link>
         </additional>
         <additional>
-            <title>XDor on Twitter</title>
-            <description>Personal twitter account of XDor</description>
+            <title>Demo on Twitter</title>
+            <description>Personal twitter account of Demo</description>
             <link>
                 <label>twitter.com</label>
                 <link>https://example.com</link>
@@ -102,7 +100,7 @@ Ut qui et eveniet. Est ut occaecati sit et rem. Esse sit ullam et dolores natus 
     <credits>
         <credit>
             <person>Henry Forest</person>
-            <role>Lead developer, Examplegames</role>
+            <role>Lead developer, My Company</role>
             <link>http://example.com/henry</link>
         </credit>
         <credit>
