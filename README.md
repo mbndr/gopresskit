@@ -61,7 +61,7 @@ All `images/` and `videos/` folders and the `favicon.ico` file are optional and 
 The three images with an underscore prefix are special images (header, icon, logo) that are displayed in their sections. All other images in an `image/` folder are displayed in the ***Images*** section of the presskit.
 
 #### Videos
-There are two ways of adding videos to your presskit, [using externally hosted ones](#video) or adding your self hosted `mp4` files (other formats can be implemented, feel free to open an [issue](https://github.com/mbndr/gopresskit/issues)). The videos in this folder are like the images automatically added to your presskit's ***Videos*** section.
+There are two ways of adding videos to your presskit, using externally hosted ones or adding your self hosted `mp4` files (other formats can be implemented, feel free to open an [issue](https://github.com/mbndr/gopresskit/issues)). The videos in this folder are like the images automatically added to your presskit's ***Videos*** section.
 
 
 #### xml files
