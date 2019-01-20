@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../../css/uikit.gradient.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/style_classic.css">
+	<title>{{ .Game.Title }} - {{ .Company.Title }}</title>
+</head>
+<body>
+
+    <div class="uk-container uk-container-center">
+        <div class="uk-grid">
+
+            <div id="navigation" class="uk-width-medium-1-4">
+                <h1 class="nav-header">{{ .Company.Title }}</h1>
+                <a class="nav-header" id="presskit-link" href="#js-required">press kit</a>
+				<script>
+				// TODO is this possible without javascript?
+				var path = window.location.pathname;
+				var pathlist = path.split("/");
+				var subpathlist = pathlist.slice(-3, -1);
+				var subpath = subpathlist.join("/") + "/";
+				var rootpath = path.replace(subpath, "");
+				document.getElementById("presskit-link").href = rootpath;
+				</script>
+                <ul class="uk-nav uk-nav-side">
+
+                        <li><a href="#factsheet">Factsheet</a></li>
+
+						{{if .Game.Description}}
+                        	<li><a href="#description">Description</a></li>
+						{{end}}
+
+						{{if .Game.History}}
+							<li><a href="#history">History</a></li>
+						{{end}}
+
+						{{if .Media.Videos}}
+                        	<li><a href="#videos">Videos</a></li>
+						{{end}}
+
+						{{if .Media.Images}}
+                        	<li><a href="#images">Images</a></li>
+						{{end}}
+
+						{{if .Media.HasLogoOrIcon}}
+							<li><a href="#logo">Logo &amp; Icon</a></li>
+						{{end}}
+
+						{{if .Game.Quotes}}
+							<li><a href="#quotes">Selected Articles</a></li>
+						{{end}}
+
+						{{if .Game.PressRequestCopy}}
+							<li><a href="#preview">Request Press Copy</a></li>
+						{{end}}
+
+						{{if .Game.Monetize}}
+							<li><a href="#monetize">Monetization Permission</a></li>
+						{{end}}
+
+						{{if .Game.Credits}}
+							<li><a href="#team">Team</a></li>
+						{{end}}
+
+						{{if .Company.Contacts}}
+							<li><a href="#contact">Contact</a></li>
+						{{end}}
+
+
+                </ul>
+            </div>
+            <div id="content" class="uk-width-medium-3-4">
+
+				{{if .Media.Header}}
+                	<img class="header" src="{{ .Media.Header }}">
+				{{end}}
+
+                <div class="uk-grid">
+
+                    <div class="uk-width-medium-2-6">
+                        <h2 id="factsheet">Factsheet</h2>
+
+                        <p>
+                            <b>Developer:</b><br>
+                            <a href="">{{ .Company.Title }}</a><br>
+                            {{if .Company.BasedIn}}
+								Based in {{ .Company.BasedIn }}
+							{{end}}
+                        </p>
+
+						{{if .Game.ReleaseDates}}
+	                        <p>
+	                            <b>Release Dates:</b><br>
+	                            {{range .Game.ReleaseDates}}
+									{{ . }}<br>
+								{{end}}
+	                        </p>
+						{{end}}
+
+						{{if .Game.Platforms}}
+	                        <p>
+	                            <b>Platforms:</b><br>
+	                            {{range .Game.Platforms}}
+									<a href="{{ .Link }}">{{ .Label }}</a><br>
+								{{end}}
+	                        </p>
+						{{end}}
+
+						{{if .Company.Website.Label}}
+	                        <p>
+	                            <b>Website:</b><br>
+	                            <a href="{{ .Company.Website.Link }}">{{ .Company.Website.Label }}</a>
+	                        </p>
+						{{end}}
+
+						{{if .Game.Prices}}
+	                        <p>
+	                            <b>Prices:</b><br>
+	                            {{range .Game.Prices}}
+									{{ . }}<br>
+								{{end}}
+	                        </p>
+						{{end}}
+
+                    </div>
+
+                    <div class="uk-width-medium-4-6">
+
+						{{if .Game.Description}}
+	                        <h2 id="description">Description</h2>
+	                        <p>{{ .Game.Description }}</p>
+						{{end}}
+
+						{{if .Game.History}}
+                        	<h2 id="history">History</h2>
+							{{range .Game.History}}
+								<b>{{ .Header }}</b>
+								<p>{{ .Text }}</p>
+							{{end}}
+						{{end}}
+
+						{{if .Game.Features}}
+                        	<h2 id="history">Features</h2>
+							<ul>
+								{{range .Game.Features}}
+									<li>{{ . }}</li>
+								{{end}}
+							</ul>
+						{{end}}
+
+                    </div>
+                </div>
+                <hr>
+
+				{{if .Media.Videos}}
+					<h2 id="videos">Videos</h2>
+					{{ range .Media.Videos }}
+						<p>
+							<b>{{ .Title }}</b> ({{ .Link }})<br>
+							<div class="uk-responsive-width {{if .UseIframeContainer}}iframe-container{{end}}">
+								{{ .Embed }}
+							</div>
+						</p>
+					{{ end }}
+					<hr>
+				{{end}}
+
+				{{if .Media.Images}}
+					<h2 id="images">Images</h2>
+					<a href="zip/images.zip"><div class="uk-alert">download all images as zip archive ({{ .Media.ZipSize "images.zip" }})</div></a>
+					<div class="uk-grid images">
+						{{ range .Media.Images }}
+							<div class="uk-width-medium-1-2">
+								<a href="{{ . }}">
+									<img src="{{ . }}">
+								</a>
+							</div>
+						{{ end }}
+					</div>
+					<p>There are far more images available for {{ .Game.Title }}, but these are the ones we felt would be most useful to you. If you have specific requests, please do <a href="#factsheet">contact us</a>!</p>
+					<hr>
+				{{end}}
+
+				{{if .Media.HasLogoOrIcon}}
+					<h2 id="logo">Logo &amp; Icon</h2>
+					<a href="zip/logo.zip"><div class="uk-alert">download logo and icon as zip archive ({{ .Media.ZipSize "logo.zip" }})</div></a>
+					<div class="uk-grid images">
+						{{if .Media.Logo}}
+							<div class="uk-width-medium-1-2">
+								<a href="{{ .Media.Logo }}">
+									<img src="{{ .Media.Logo }}">
+								</a>
+							</div>
+						{{end}}
+						{{if .Media.Icon}}
+							<div class="uk-width-medium-1-2">
+								<a href="{{ .Media.Icon }}">
+									<img src="{{ .Media.Icon }}">
+								</a>
+							</div>
+						{{end}}
+					</div>
+					<hr>
+				{{end}}
+
+				{{if .Game.Awards}}
+					<h2 id="quotes">Awards &amp; Recognition</h2>
+					<ul>
+						{{ range .Game.Awards }}
+							<li>"{{ .Description }}"<br>
+								<cite>- {{ .Info }}</cite>
+							</li>
+						{{end}}
+					</ul>
+					<hr>
+				{{ end }}
+
+				{{if .Game.Quotes}}
+					<h2 id="quotes">Selected Articles</h2>
+					<ul>
+						{{ range .Game.Quotes }}
+							<li>"{{ .Text }}"<br>
+								<cite>- {{ .From }}</cite>
+								<a href="{{ .Link.Link }}">{{ .Link.Label }}</a>
+							</li>
+						{{end}}
+					</ul>
+					<hr>
+				{{ end }}
+
+				{{if .Game.PressRequestCopy}}
+					<h2 id="preview">Request Press Copy</h2>
+					<p>You can always request a press copy by <a href="#contact">sending us a quick email</a>.</p>
+					<hr>
+				{{end}}
+
+				{{if .Game.Monetize}}
+					<h2 id="monetize">Monetization Permission</h2>
+					<p>{{ .MonetizeText }}</p>
+					<hr>
+				{{end}}
+
+				{{if .Game.Additionals}}
+					<h2 id="quotes">Additional Links</h2>
+					{{ range .Game.Additionals }}
+						<p>
+							<b>{{ .Title }}</b><br>
+							{{ .Description }} available at&nbsp;
+							<a href="{{ .Link.Link }}">{{ .Link.Label }}</a>
+						</p>
+					{{end}}
+					<hr>
+				{{ end }}
+
+				<div class="uk-grid">
+					{{if .Game.Credits}}
+						<div class="uk-width-medium-1-2">
+							<h2 id="team">Team &amp; Repeating Collaborators</h2>
+							{{ range .Game.Credits }}
+								<p>
+									<b>{{ .Person }}</b><br>
+									<a href="{{ .Link }}">{{ .Role }}</a>
+								</p>
+							{{end}}
+						</div>
+					{{ end }}
+
+					{{if .Company.Contacts}}
+						<div class="uk-width-medium-1-2">
+							<h2 id="contact">Contact</h2>
+							{{ range .Company.Contacts }}
+								<p>
+									<b>{{ .Name }}</b><br>
+									<a href="{{ .Link.Link }}">{{ .Link.Label }}</a>
+								</p>
+							{{end}}
+						</div>
+					{{ end }}
+				</div>
+				<hr>
+
+            	<p>Built with <a href="https://github.com/mbndr/gopresskit">gopresskit()</a> - see original <a href="http://www.vlambeer.com/press/sheet.php?p=credits">credits</a></p>
+            </div>
+        </div>
+    </div>
+
+	<script type="text/javascript" src="../../js/mansory.min.js"></script>
+	<script type="text/javascript" src="../../js/script.js"></script>
+
+</body>
+</html>

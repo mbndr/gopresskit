@@ -14,6 +14,7 @@ func main() {
 		inputPath  = flag.String("input", ".", "Folder with the presskit data")
 		outputPath = flag.String("output", "./press", "Folder for the presskit html")
 		forceMode  = flag.Bool("force", false, "Force existing output folder to remove")
+		classicStyle = flag.Bool("classic", false, "Use the classic style of dopresskit")
 		usage  = flag.Bool("help", false, "Show command usage")
 	)
 
@@ -29,6 +30,7 @@ func main() {
 		OutputPath: *outputPath,
 		Parser:     presskit.XMLParser{},
 		ForceMode:  *forceMode,
+		ClassicStyle: *classicStyle,
 	}
 
 	err := p.Generate()

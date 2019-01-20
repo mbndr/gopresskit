@@ -17,6 +17,8 @@ type Presskit struct {
 	OutputPath string
 	// if enabled, the output folder will removed and overwritten instead of a error
 	ForceMode bool
+	// use original dopresskit style
+	ClassicStyle bool
 }
 
 // Generate handles the whole generation process
@@ -24,6 +26,12 @@ func (p Presskit) Generate() error {
 	// delete previous outputs if forced
 	if p.ForceMode {
 		os.RemoveAll(p.OutputPath)
+	}
+
+	// set template names for classic style
+	if p.ClassicStyle {
+		GameTemplate = "classic_game"
+		CompanyTemplate = "classic_company"
 	}
 
 	// setup base folder structure
@@ -198,7 +206,14 @@ func (p Presskit) setupOutputFolder(outputPath string, folders []string) error {
 
 // generateStaticFiles generates all needed files stored binary
 func (p Presskit) generateStaticFiles() error {
-	for _, path := range []string{"css/style.css", "css/uikit.gradient.min.css", "js/mansory.min.js", "js/script.js"} {
+	files := []string{"css/uikit.gradient.min.css", "js/mansory.min.js", "js/script.js"}
+	customStyle := "css/style.css"
+	if p.ClassicStyle {
+		customStyle = "css/style_classic.css"
+	}
+	files = append(files, customStyle)
+
+	for _, path := range files {
 		// get content
 		raw, err := Asset(path)
 		if err != nil {

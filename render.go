@@ -5,6 +5,10 @@ import (
 	"html/template"
 )
 
+// just a simple (not perfect) solution because implemented after first working release
+var GameTemplate = "game"
+var CompanyTemplate = "company"
+
 // companyData is given to a company template
 type companyData struct {
 	Company  company
@@ -43,7 +47,7 @@ func render(tplName string, data interface{}) ([]byte, error) {
 
 // renderGame renders a game html
 func renderGame(c company, g game, m media) ([]byte, error) {
-	return render("game", gameData{
+	return render(GameTemplate, gameData{
 		companyData: companyData{
 			Company: c,
 			Media:   m,
@@ -54,7 +58,7 @@ func renderGame(c company, g game, m media) ([]byte, error) {
 
 // renderCompany renders a company html
 func renderCompany(c company, m media, gl map[string]string) ([]byte, error) {
-	return render("company", companyData{
+	return render(CompanyTemplate, companyData{
 		Company:  c,
 		Media:    m,
 		GameList: gl,
